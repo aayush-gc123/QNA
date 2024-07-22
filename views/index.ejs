@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Q&A</title>
+</head>
+<body>
+  <% if (session.username) { %>
+    <p>Welcome, <%= session.username %>! <a href="/ask">Ask a question</a> | <a href="/logout">Logout</a></p>
+  <% } %>
+  <h1>Questions</h1>
+  <ul>
+    <% questions.forEach((q, index) => { %>
+      <li>
+        <%= q.question %> (asked by <%= q.askedBy %>)
+        <ul>
+          <% q.answers.forEach((a) => { %>
+            <li><%= a.answer %> (answered by <%= a.answeredBy %>)</li>
+          <% }) %>
+        </ul>
+        <% if (session.username) { %>
+          <a href="/answer/<%= index %>">Answer</a>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
+
